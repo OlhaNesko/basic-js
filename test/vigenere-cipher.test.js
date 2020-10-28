@@ -77,7 +77,7 @@ describe("Vigenere cipher", () => {
   //Specific requirements
   describe("base requirements", () => {
     const directMachine = new VigenereCipheringMachine();
-    const reverseMachine = new VigenereCipheringMachine(false);
+    const reverseMachine = new VigenereCipheringMachine();
 
     it.optional("must throw an Error if no args", function () {
       let res = null;
@@ -164,7 +164,13 @@ describe("Vigenere cipher", () => {
         const testStr = createTestString(i);
         const reversedTestStr = testStr.split("").reverse().join("");
         const testKey = createTestKey(i - (i % 2));
+        console.log(
+          `reversedTestStr = ${reversedTestStr}\ntestKey = ${testKey}`
+        );
         const encrypted = reverseMachine.encrypt(reversedTestStr, testKey);
+        console.log(
+          `reversedTestStr = ${reversedTestStr}\ntestKey = ${testKey}`
+        );
         const reversedEncrypted = encrypted.split("").reverse().join("");
         assert.equal(
           reverseMachine.decrypt(reversedEncrypted, testKey),
